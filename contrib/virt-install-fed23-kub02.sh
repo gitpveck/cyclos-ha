@@ -1,0 +1,1 @@
+virt-install -r 1024 -n fed23-kub02 --disk /kvm_tst/fed23_kub02_dsk01.img,bus=virtio,cache=none,io=native -w network=vlan01 --location 'http://mirror.i3d.net//pub/fedora/linux/releases/23/Server/x86_64/os/' --nographics --extra-args "console=ttyS0,115200 serial"
