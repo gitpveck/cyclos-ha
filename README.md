@@ -55,6 +55,7 @@ kubectl get no
 
 on the master node (fed23-kub01)
 
+The nodes should show "ready" state
 
 ## Create HA Stolon postgresql cluster in kubernetes
 
@@ -97,4 +98,57 @@ This will create a replication controller that will create one pod executing the
 
 Once the leader sentinel has elected the first master and created the initial cluster view you can add additional stolon keepers. Will do this later.
 
-# Create cyclos pod in kubernetes
+
+#### Create the proxies
+
+```
+kubectl create -f stolon-proxy.yaml
+```
+
+Also the proxies can be created from the start with multiple replicas.
+
+### Create the proxy service
+
+The proxy service is used as an entry point with a fixed ip and dns name for accessing the proxies.
+
+```
+kubectl create -f stolon-proxy-service.yaml
+```
+
+Now scale the keeper
+
+```
+kubectl scale --replicas=2 rc stolon-keeper-rc
+```
+
+This creates a slave running..
+
+### Create cyclos database in the stolon cluster
+
+This part is not automated yet but should be in the future.
+
+First run a postgresql pod. This in order to connect to the stolon proxy service via that pod.
+This is for creating the cyclos and extensions. 
+
+```
+kubectl run postgres-inst --image=postgres
+```
+We are now going to create the cyclos database and extensions using this pod.
+
+Get the pod name :
+
+```
+kubectl get pod postgres-inst
+```
+
+Something like 'postgres-inst-3467469619-9c7zi' should show as the name of the pod.
+
+Create the database
+
+```
+kubectl exec postgres-inst-3467469619-9c7zi -i --tty -- psql --host stolon-proxy-service postgres --port 5432 -U stolon -W -c "CREATE DATABASE cyclos"
+```
+
+
+
+
