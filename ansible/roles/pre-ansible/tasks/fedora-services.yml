@@ -1,0 +1,11 @@
+- name: Start ntpd
+  service: name=ntpd state=started
+
+- name: enable ntpd service
+  service: name=ntpd enabled=yes
+
+- name: Stop firewalld
+  service: name=firewalld state=stopped
+
+- name: disable firewalld service
+  service: name=firewalld enabled=no
