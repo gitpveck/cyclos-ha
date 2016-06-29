@@ -2,7 +2,7 @@
 
 if [ $# != 2 ]
   then
-    echo "Usage: $0 name virtualdiskpath"
+    echo "Usage: $0 name <path>/virtualdiskimage"
     echo "For example: $0 VM1 /kvm_data/kub_fedora/fed23_kub01_dsk01.img"
     exit 1
 fi

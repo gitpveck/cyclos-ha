@@ -1,0 +1,10 @@
+
+[masters]
+fed23-kub01
+
+[etcd]
+fed23-kub01
+
+[nodes]
+fed23-kub01
+fed23-kub02

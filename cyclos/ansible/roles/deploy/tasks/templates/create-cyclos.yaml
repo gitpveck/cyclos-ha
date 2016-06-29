@@ -1,0 +1,25 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: cyclos-app
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: cyclos-app
+    spec:
+      containers:
+      - name: cyclos
+        image: cyclos/cyclos
+        env:
+          - name: DB_HOST
+            value: "stolon-proxy-service"
+          - name: DB_NAME
+            value: "cyclos"
+          - name: DB_USER
+            value: "cyclos"
+          - name: DB_PASSWORD
+            value: "cyclos"
+        ports:
+          - containerPort: 80
