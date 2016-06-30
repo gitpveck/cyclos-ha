@@ -25,7 +25,7 @@ spec:
           - name: STKEEPER_STORE_BACKEND
             value: "etcd" # Or consul
           - name: STKEEPER_STORE_ENDPOINTS
-            value: "kub-fed01:2379"
+            value: "fed23-kub01:2379"
             # Enable debugging
           - name: STKEEPER_PG_REPL_USERNAME
             value: "repluser"
