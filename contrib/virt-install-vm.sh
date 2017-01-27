@@ -6,6 +6,7 @@
 CNTS6='http://mirror.i3d.net/pub/centos/6/os/x86_64/'
 CNTS7='http://mirror.i3d.net/pub/centos/7/os/x86_64/'
 FED23='http://mirror.i3d.net//pub/fedora/linux/releases/23/Server/x86_64/os/'
+UB16='http://archive.ubuntu.com/ubuntu/dists/xenial/main/installer-amd64/'
 
 if [ $# != 2 ]
   then
@@ -19,7 +20,7 @@ DISK=$2
 
 if [ -f ${DISK} ]
   then
-    read -p "Enter which OS to install: 1) Centos6 2) Centos7 3) Fedora23" a
+	  read -p "Enter which OS to install: 1) Centos6 2) Centos7 3) Fedora23 4) Ubuntu16" a
     case $a in
       '1')
         echo " Starting Centos6 installation..."
@@ -38,7 +39,12 @@ if [ -f ${DISK} ]
         virt-install -r 1024 -n ${NAME} --disk ${DISK},bus=virtio,cache=none,io=native -w network=default \
         --location ${FED23} --nographics --extra-args "console=ttyS0,115200 serial"
       ;;
-     
+
+     '4')
+        echo " Starting Ubuntu installation..."
+        virt-install -r 1024 -n ${NAME} --disk ${DISK},bus=virtio,cache=none,io=native -w network=default \
+        --location ${UB16} --nographics --extra-args "console=ttyS0,115200 serial"
+      ;;
       *)
       echo "please enter 1,2 or 3"
     esac
