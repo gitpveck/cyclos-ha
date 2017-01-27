@@ -34,7 +34,7 @@ if [ -f ${DISK} ]
       ;;
       
       '3')
-        echo " Starting Centos7 installation..."
+        echo " Starting Fedora23 installation..."
         virt-install -r 1024 -n ${NAME} --disk ${DISK},bus=virtio,cache=none,io=native -w network=default \
         --location ${FED23} --nographics --extra-args "console=ttyS0,115200 serial"
       ;;
